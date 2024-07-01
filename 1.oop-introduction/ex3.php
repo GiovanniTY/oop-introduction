@@ -1,5 +1,3 @@
-
-
 <?php
 
 declare(strict_types=1);
@@ -7,9 +5,9 @@ declare(strict_types=1);
 class Beverage
 {
     // Propriétés
-    public string $color; // La couleur de la boisson
-    public float $price; // Le prix de la boisson
-    public string $temperature; // La température de la boisson
+    private string $color; // La couleur de la boisson
+    private float $price; // Le prix de la boisson
+    private string $temperature; // La température de la boisson
 
     // Le constructeur
     public function __construct(string $color, float $price, string $temperature = 'cold')
@@ -20,18 +18,29 @@ class Beverage
         $this->temperature = $temperature;
     }
 
+    public function getColor(): string
+    {
+        return $this->color;
+    }
+
+
     // Fonction getInfo
     public function getInfo(): string // Déclarer le type de retour
     {
         // Retourner une chaîne de caractères décrivant la boisson
         return "Cette boisson est $this->temperature et $this->color.";
     }
+
+    public function setColor(string $color): void //Nouvelle function pour changer de couler
+    {
+        $this->color = $color;
+    }
 }
 //Creé une class a partir d une autre 
 class Beer extends Beverage
 {
-    public string $name;
-    public float $alcoholPercentage;
+    private string $name;
+    private float $alcoholPercentage;
 
     public function __construct(string $name,  float $price, string $color, float $alcoholPercentage, string $temperature = 'cold')
     {
@@ -43,19 +52,31 @@ class Beer extends Beverage
     public function getAlcoholPercentage(): string
     {
 
-    return "L'alcol de cette boisson est $this->alcoholPercentage";
+    return "L'alcol de cette boisson est $this->alcoholPercentage%";
+    }
+
+    private function beerInfo(): string
+    {
+        return "Hi i'm Duvel and have an alcochol percentage of $this->alcoholPercentage% and I have a {$this->getColor()} color.";
+    }
+
+    public function getBeerInfo(): string
+    {
+        return $this->beerInfo();
     }
 }
 
-// Création d'un nouvel objet Beverage représentant du cola
-$cola = new Beverage('black', 2.0);
+
 
 //Creation d un nouvel objet Beverage représantant du Duvel
 $Duvel = new Beer('Duvel', 3.5, 'blonde',8.5);
 
 // Afficher les informations sur duvel 
 echo "Info sur la Duvel:<br>";
-echo "Couleur: " .$Duvel->color . "<br>";
-echo $duvel->getInfo() . "<br>";
+echo "Couleur: " .$Duvel->getColor(). "<br>";
+echo $Duvel->getInfo() . "<br>";
 echo $Duvel->getAlcoholPercentage() . "<br>";
+$Duvel->setColor('light');
+echo "Nouvelle couleur du Duvel :" . $Duvel->getColor() . "<br>";
+echo $Duvel->getBeerInfo() . "<br>" ;
 ?>
