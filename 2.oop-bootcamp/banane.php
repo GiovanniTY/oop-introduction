@@ -42,7 +42,7 @@ echo $totalGainVin; */
 
 //Deuxieme options 
 
-function calculateTotalCostWithTax(int $quantity, float $pricePerItem, float $taxeRate):array
+/* function calculateTotalCostWithTax(int $quantity, float $pricePerItem, float $taxeRate):array
 {
     $totalCost = $quantity * $pricePerItem;
     $taxAmount = $totalCost * ($taxeRate / 100);
@@ -74,3 +74,49 @@ echo "Taxe Total: €" . number_format($totalTax,2) . "\n";
 
 
 
+ */
+
+ class Product 
+ {
+    //Propriétes 
+    public string $name;
+    public int $pieces;
+    public float $price;
+    public float $taxeRate;
+
+    // the constructer 
+    public function __construct(string $name, int $pieces, float $price, float $taxRate) 
+    {
+
+    $this->name = $name;
+    $this->pieces = $pieces;
+    $this->prices = $price;
+    $this->taxRate = $taxRate;
+    }
+
+    public function calculateTotalCostWithTax(): array
+    {
+        $totalCost = $this->pieces * $this->price;
+        $taxAmount = $totalCost * ($this->taxeRate / 100);
+        $totalCostWithTax = $totalCost + $taxAmount;
+        return[
+            'totalCost' => $totalCostWithTax,
+            'taxAmount' => $taxAmount
+        ];
+
+    }
+}
+
+// Création des produits
+$bananas = new Product('bananas', 6, 1, 6.0);
+$apples = new Product('apples', 3, 1.50, 6.0);
+$wine = new Product('wine', 2, 10, 21.0);
+
+//Calcul tu cout total et des taxes pour chaque produit 
+$bananasCost = $bananas->calculateTotalCostWithTax();
+$applesCost = $apples->calculateTotalCostWithTax();
+$wineCost = $wine->calculateTotalCostWithTax();
+
+    
+
+ 
